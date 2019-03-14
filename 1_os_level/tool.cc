@@ -1,18 +1,25 @@
 #include <iostream>
 #include <string>
+using namespace std;
 
-std::string translate(std::string input, std::string variabele)
-{ std::string result = ""; // implementeer dit
-  return result; }
+string translate(string input, string variable){
+	string resultaat = "";
+	for(int i=0; i<variable.size(); i++){
+		if(variable[i] >= 'a'){
+			resultaat += variable[i] + ('A'-'a');}
+		else{
+			resultaat += variable[i] - ('A' - 'a');}}
+	return resultaat;}
 
-int main(int argc, char *argv[])
-{ std::string s;
+int main(int argc, char *argv[]){
+	string s;
+	if(argc != 2){
+		cerr << "Deze functie heeft excact 1 argument nodig\n";
+		return -1;}
 
-  if(argc != 2)
-  { std::cerr << "Deze functie heeft exact 1 argument nodig";
-    return -1; }
-
-  while(true)
-  { std::cin >> s;
-    if(std::cin.eof()){ return 0; }
-    std::cout << translate(argv[1], s) << std::endl; } }
+	while(true){
+		cin >> s;
+		if(cin.eof()){
+			return 0 ;}
+		cerr << translate(argv[1], s) << endl;}
+}
