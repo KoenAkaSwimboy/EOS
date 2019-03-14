@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+jpgaantal=0
+pdfaantal=0
+docaantal=0
+for i in ./bestanden/*;
+do case $i in *.jpg)
+	$jpgaantal = $jpgaantal+1;;
+	*.pdf)
+	$pdfaantal=$pdfaantal+1;;
+	*.doc)
+	$docaantal = $docaantal+1;;
+	*) esac; done
+	echo .jpg':' $jpgaantal .pdf':' $pdfaantal  .doc':' $docaantal
