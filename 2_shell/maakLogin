@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+login=$1
+if [ -e $login ]; then
+    rm $login
+fi
+touch $login
+
+echo naam:
+read naam
+
+if [ -z $naam ]; then
+	naam= $(whoami)
+fi
+echo "wachtwoord: "
+read wachtwoord
+echo "2e wachtwoord: "
+read wachtwoord2
+
+while [ true ]; do
+	if [[ $wachtwoord != $wachtwoord2 ]]; then
+		echo "De wachtwoorden zijn niet gelijk vul opnieuw: "
+		read wachtwoord
+		echo "2e wachtwoord: "
+		read wachtwoord2
+	fi
+	if [[ ! $wachtwoord =~ [^a-zA-Z0-9] ]]; then
+		echo "Het wachtwoord bevat geen cijfers/hoofdletters/letters vul opnieuw"
+		read wachtwoord
+		echo "2e wachtwoord"
+		read wachtwoord2
+	fi
+	if [[ ${#wachtwoord} < 8 ]]; then
+		echo "Het wachtwoord moet minimaal 8 charaters bevatten vul opnieuw"
+		read wachtwoord
+		echo "2e wachtwoord"
+		read wachtwoord2
+	else
+		break
+	fi
+done
+
+touch $login
+echo $naam >> $login
+md5sum <<< "$wachtwoord" | xargs echo -n >> $login
