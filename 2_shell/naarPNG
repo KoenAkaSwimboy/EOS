@@ -1,0 +1,8 @@
+#!/usr/bin/env dash
+
+for i in ./bestanden/*;
+do case $i in *.jpg)
+
+	convert-im6.q16 $i ${i%.jpg}.png
+	convert-im6.q16 $i -resize 128x128! $i;;
+	*) esac; done

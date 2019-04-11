@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+echo Geef command:
+read command
+
+$command > logbestand.txt
+
+if [ -e logbestand.txt ]; then
+	rm logbestand.txt
+fi
+touch logbestand.txt
+for file in ./*; do
+	$command "$file"
+	echo $? >> logbestand.txt
+done
